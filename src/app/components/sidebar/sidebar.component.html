@@ -1,0 +1,16 @@
+<div class="sidebar" [class.collapsed]="isCollapsed">
+  <!-- Botão de menu -->
+  <button class="menu-toggle-btn" (click)="toggleSidebar()">
+    <i class="menu-icon">☰</i>
+  </button>
+  <!-- Conteúdo do menu -->
+  <div class="menu-content">
+    <h1>
+      <a href="/empresas" style="cursor: pointer;">RegulaSis</a>
+    </h1>
+    <ul>
+      <li><a href="/empresas">Home</a></li>
+      <li><a href="/empresas">Empresas</a></li>
+    </ul>
+  </div>
+</div>

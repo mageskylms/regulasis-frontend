@@ -1,0 +1,75 @@
+<div class="main">
+    
+    <section class="form-container">
+        <h1>Cadastrar Nova Empresa</h1>
+        <form [formGroup]="empresaForm" (ngSubmit)="criarEmpresa()">
+            <!-- Dados Básicos da Empresa -->
+            <label for="nomeEmpresa">Nome</label>
+            <input type="text" id="nome" formControlName="nome" placeholder="Ex: Empresa XYZ Ltda"
+                required>
+
+            <label for="nomeFantasia">Nome Fantasia</label>
+            <input type="text" id="nomeFantasia" formControlName="nomeFantasia" placeholder="Ex: Empresa XYZ Ltda">
+
+            <label for="cnpj">CNPJ</label>
+            <input type="text" id="cnpj" formControlName="cnpj" placeholder="Ex: 12.345.678/0001-99" required>
+
+            <label for="enderecoSede">Endereço</label>
+            <input type="text" id="enderecoSede" formControlName="enderecoSede" placeholder="Ex: Rua ABC, 123" required>
+
+            <label for="nomeResponsavel">Responsável</label>
+            <input type="text" id="nomeResponsavel" formControlName="nomeResponsavel" placeholder="Nome do Responsável"
+                required>
+
+            <label for="contatoResponsavel">Contato Responsável</label>
+            <input type="text" id="contatoResponsavel" formControlName="contatoResponsavel" placeholder="Ex: (11) 1234-5678">
+
+            <label for="emailResponsavel">Email Responsável</label>
+            <input type="email" id="emailResponsavel" formControlName="emailResponsavel" placeholder="contato@empresa.com" required>
+
+            <!-- Setor da Empresa -->
+            <label for="setor">Setor</label>
+            <select id="setor" formControlName="setor" required>
+                <option value="residencial">residencial</option>
+                <option value="comercial">comercial</option>
+                <option value="industrial">Industrial</option>
+                <option value="outro">Outro</option>
+            </select>
+
+            <!-- Observações -->
+            <label for="observacoes">Observações</label>
+            <textarea id="observacoes" formControlName="observacoes" placeholder="Observações adicionais (opcional)"></textarea>
+            <label for="tipo">Tipo:</label>
+            <div>
+                <label>
+                    <input type="radio" id="tipo" formControlName="tipo" value="sede" (change)="toggleDropdown()">
+                    Sede
+                </label><br>
+                <label>
+                    <input type="radio" id="tipo" formControlName="tipo" value="filial" (change)="toggleDropdown()">
+                    Filial
+                </label><br>
+            </div>
+
+            <div *ngIf="showDropdown">
+                <label for="" style="label {font-size: 1.1em; color: #2c3e50; grid-column: 1; text-align: right;}">
+                    Empresa sede:
+                </label>
+            </div>
+
+            <div *ngIf="showDropdown">
+                <label for="idEmpresaSede"></label>
+                <select id="idEmpresaSede" formControlName="idEmpresaSede">
+                    <option *ngFor="let empresa of empresas" [value]="empresa.id">
+                        {{ empresa.nome }}
+                    </option>
+                </select>
+            </div>
+            <div class="form-actions">
+                <button class="btn btn-secondary" (click)="voltarParaEmpresas()">Cancelar</button>
+            </div>
+            <button type="submit">Salvar Empresa</button>
+        </form>
+    </section>
+
+</div>

@@ -1,0 +1,43 @@
+<div class="main">
+  <section class="details-container">
+    <div class="content">
+      <div class="details" *ngIf="empresa">
+        <h1>Detalhes da Empresa</h1>
+        <p><strong>Nome:</strong> {{ empresa.nome }}</p>
+        <p><strong>Nome Fantasia:</strong> {{ empresa.nomeFantasia }}</p>
+        <p><strong>CNPJ:</strong> {{ empresa.cnpj }}</p>
+        <p><strong>Endereço:</strong> {{ empresa.enderecoSede }}</p>
+        <p><strong>Responsável:</strong> {{ empresa.nomeResponsavel }}</p>
+        <p><strong>Contato Responsável:</strong> {{ empresa.contatoResponsavel }}</p>
+        <p><strong>Email Responsável:</strong> {{ empresa.emailResponsavel }}</p>
+        <p><strong>Setor:</strong> {{ empresa.setor }}</p>
+        <p><strong>Observações:</strong> {{ empresa.observacoes }}</p>
+        <p><strong>Tipo:</strong> {{ empresa.tipo }}</p>
+        <p *ngIf="empresa.tipo === 'filial'" >
+          <strong>Empresa Sede:</strong> {{ empresaSede?.nome + " | Código: " + empresaSede?.id || 'Carregando...' }}
+          <br>
+          <br>
+          <a [routerLink]="['/detalhes-empresa', empresaSede?.id]">Detalhes da empresa sede</a>
+        </p>        
+      </div>
+      <div class="details-actions">
+        <span class="opcoes"><strong>Opções</strong></span>
+        <button class="btn btn-primary" (click)="editarEmpresa()">Editar</button>
+        <button class="btn btn-danger" (click)="excluirEmpresa()">Excluir</button>
+        <button class="btn btn-primary" (click)="voltarParaEmpresas()">Voltar</button>
+      </div>
+    </div>
+  </section>
+  <section class="filiais-container">
+    <div class="content">
+      <h2>FILIAIS DA EMPRESA</h2>
+      <h3>Em breve</h3>
+    </div>
+  </section>
+  <section class="filiais-container">
+    <div class="content">
+      <h2>PROCESSOS DA EMPRESA</h2>
+      <h3>Em breve</h3>
+    </div>
+  </section>
+</div>

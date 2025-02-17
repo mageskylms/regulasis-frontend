@@ -1,0 +1,66 @@
+/* Estilização do menu lateral */
+.sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 250px;
+    /* Largura do menu */
+    height: 100%;
+    background-color: #2c3e50;
+    color: white;
+    transition: transform 0.8s ease;
+    z-index: 1000;
+}
+
+/* Quando o menu está escondido */
+.sidebar.collapsed {
+    transform: translateX(-90%);
+}
+
+.sidebar.collapsed .menu-toggle-btn {
+    border: 1px solid #ffffff;
+}
+
+/* Botão para abrir/fechar o menu */
+.menu-toggle-btn {
+    position: absolute;
+    top: 20px;
+    right: -20px;
+    background-color: #2c3e50;
+    color: white;
+    border: none;
+    font-size: 30px;
+    cursor: pointer;
+    z-index: 2000;
+}
+
+/* Estilização do menu */
+.menu-content {
+    padding: 20px;
+}
+
+.menu-content ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.menu-content li {
+    padding: 10px 0;
+}
+
+.menu-content a {
+    color: white;
+    text-decoration: none;
+}
+
+h1 {
+    color: #ffffff;
+}
+
+@media (max-width: 768px) {
+
+    .sidebar.collapsed {
+        transform: translateX(-100%);
+    }
+    
+}
