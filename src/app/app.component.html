@@ -1,7 +1,22 @@
-<div class="main-container">
-    <!-- Menu lateral -->
-    <app-sidebar></app-sidebar>
-    <div class="content-container">
-      <router-outlet></router-outlet>
+<div *ngIf="showLoading" class="loading-screen">
+  <div class="loader">
+    <h1>RegulaSis</h1>
+    <p>Carregando ambiente para você...</p>
+    <div class="spinner"></div>
+  </div>
+</div>
+
+<div *ngIf="!showLoading">
+  <div *ngIf="!isLoggedIn; else mainApp">
+    <app-login (loginSuccess)="handleLoginSuccess()"></app-login>
+  </div>
+
+  <ng-template #mainApp>
+    <div class="main-container" [@fadeIn]>
+      <app-sidebar></app-sidebar>
+      <div class="content-container" [@pageTransition]="getRouteAnimation(routerOutlet)">
+        <router-outlet #routerOutlet="outlet"></router-outlet>
+      </div>
     </div>
+  </ng-template>
 </div>

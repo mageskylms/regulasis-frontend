@@ -9,7 +9,7 @@ app-root {
 /* Contêiner principal */
 .main-container {
     display: flex;
-    width: 100%;
+    width: 100vw;
     height: 100%;
     transition: all 0.3s ease;
 }
@@ -23,7 +23,7 @@ app-root {
 /* Estado quando o menu está fechado */
 .main-container.menu-closed .content-container {
     margin-left: 0;
-    width: calc(100vw - 80px);
+    width: 100%;
     transition: all 0.7s ease;
 }
 
@@ -34,6 +34,60 @@ app-root {
     padding: 20px;
     overflow-x: auto;
 }
+
+.loading-screen {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    text-align: center;
+    height: 100vh;
+    width: 100vw;
+    background: linear-gradient(135deg, #4f46e5, #06b6d4);
+    color: white;
+    flex-direction: column;
+    animation: fadeIn 1s ease-in;
+}
+
+.loader h1 {
+    font-size: 3rem;
+    margin-bottom: 0.5rem;
+    animation: bounce 1.5s infinite;
+}
+
+.loader p {
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+}
+
+.spinner {
+    text-align: center;
+    border: 5px solid rgba(255, 255, 255, 0.3);
+    border-top: 5px solid #fff;
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes bounce {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
 
 /* 💡💡💡 RESPONSIVIDADE 💡💡💡 */
 

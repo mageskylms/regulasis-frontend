@@ -1,5 +1,8 @@
 /* Estilização do menu lateral */
 .sidebar {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     position: fixed;
     top: 0;
     left: 0;
@@ -14,7 +17,7 @@
 
 /* Quando o menu está escondido */
 .sidebar.collapsed {
-    transform: translateX(-90%);
+    transform: translateX(-100%);
 }
 
 .sidebar.collapsed .menu-toggle-btn {
@@ -55,6 +58,10 @@
 
 h1 {
     color: #ffffff;
+}
+
+.user {
+    padding: 20px;
 }
 
 @media (max-width: 768px) {

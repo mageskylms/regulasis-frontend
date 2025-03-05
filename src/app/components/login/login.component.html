@@ -1,0 +1,19 @@
+<div class="login-page">
+  <!-- Lado visual (Logo + Texto) -->
+  <div class="login-info">
+    <h1>🏗️ RegulaSis</h1>
+    <p>Simplifique a regularização de imóveis com um fluxo de trabalho inteligente.</p>
+    <p>🔒 Segurança | ⚡ Agilidade | 🏡 Confiabilidade</p>
+  </div>
+
+  <!-- Lado do formulário de login -->
+  <div class="login-form">
+    <h2>🔐 Faça seu Login</h2>
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+      <input type="text" placeholder="Usuário" formControlName="user" />
+      <input type="password" placeholder="Senha" formControlName="password" />
+      <button type="submit" [disabled]="loading">Entrar</button>
+      <p class="error-message" *ngIf="error">{{ error }}</p>
+    </form>
+  </div>
+</div>

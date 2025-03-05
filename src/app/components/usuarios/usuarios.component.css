@@ -1,0 +1,26 @@
+.user-management-container {
+    padding: 20px;
+}
+
+.user-form,
+.user-list {
+    margin-bottom: 30px;
+}
+
+input,
+select {
+    margin: 10px 0;
+}
+
+button {
+    margin-left: 10px;
+}
+
+.user-list ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.user-list li {
+    margin-bottom: 10px;
+}

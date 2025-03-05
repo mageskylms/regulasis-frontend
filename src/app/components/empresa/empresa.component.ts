@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Renderer2 } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router, RouterLink, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
@@ -17,11 +17,12 @@ export class EmpresaComponent implements OnInit {
   searchCnpj: string = '';
   selectedSector: string = '';
 
-  constructor(private empresaService: EmpresaService, private router: Router) { }
+  constructor(private empresaService: EmpresaService, private router: Router, private renderer: Renderer2) { }
 
   ngOnInit(): void {
     this.loadCompanies();
   }
+
 
   loadCompanies(): void {
     this.empresaService.getEmpresas().subscribe((data) => {

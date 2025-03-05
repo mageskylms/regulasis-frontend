@@ -11,6 +11,14 @@
     <ul>
       <li><a href="/empresas">Home</a></li>
       <li><a href="/empresas">Empresas</a></li>
+      <li><a href="/usuarios">Gerenciar Usuários</a>
+
     </ul>
   </div>
+
+  <div class="user">
+    <p>Olá, {{ userName }}!</p>
+    <button (click)="logout()">Logout</button>
+  </div>
+
 </div>

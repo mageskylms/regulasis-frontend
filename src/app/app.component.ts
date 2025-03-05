@@ -1,20 +1,61 @@
-import { Component, Renderer2, AfterViewInit } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
-import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { CommonModule } from '@angular/common';
+import { Component } from '@angular/core';
+import { Router, RouterOutlet } from '@angular/router';
+import { LoginComponent } from './components/login/login.component';
+import { SidebarComponent } from './components/sidebar/sidebar.component';
+import { trigger, transition, style, animate } from '@angular/animations';
+import { UsuariosComponent } from './components/usuarios/usuarios.component';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, SidebarComponent, CommonModule],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
+  styleUrls: ['./app.component.css'],
+  imports: [CommonModule, LoginComponent, SidebarComponent, RouterOutlet],
+  animations: [
+    trigger('fadeIn', [
+      transition(':enter', [style({ opacity: 0 }), animate('500ms ease-in', style({ opacity: 1 }))])
+    ]),
+    trigger('pageTransition', [
+      transition('* <=> *', [
+        style({ opacity: 0 }),
+        animate('250ms ease-in', style({ opacity: 1 }))
+      ])
+    ])
+  ]
 })
 export class AppComponent {
-  constructor(private renderer: Renderer2) {}
+  isLoggedIn: boolean = false;
+  showLoading: boolean = true;
 
-  ngAfterViewInit() {
-    // Define a classe inicial para que o layout já esteja correto ao carregar
-    const mainContainer = document.querySelector('.main-container');
-    this.renderer.addClass(mainContainer, 'menu-open'); // Assume que o menu começa aberto
+  constructor(private router: Router) {}
+
+  ngOnInit() {
+    const token = localStorage.getItem('token');
+    this.isLoggedIn = !!token; // Verifica se há token para liberar o sistema
+
+    // Simula um tempo de carregamento (ajustado para funcionar apenas quando necessário)
+    if (this.isLoggedIn) {
+      this.showLoading = false; // Se já estiver logado, não mostra o loading
+      this.router.navigate(['/empresas']); // Vai direto para a tela principal
+    } else {
+      // Se não estiver logado, exibe o loading por 1,5 segundo
+      setTimeout(() => {
+        this.showLoading = false;
+      }, 1500);
+    }
+  }
+
+  handleLoginSuccess() {
+    this.isLoggedIn = true;
+    this.showLoading = true; // Inicia o loading após o login
+    // Exibe a tela de loading por 1 segundo para dar tempo de transição
+    setTimeout(() => {
+      this.router.navigate(['/empresas']); // Redireciona para a tela principal
+      this.showLoading = false; // Fecha o loading após o redirecionamento
+    }, 1000);
+  }
+
+  getRouteAnimation(outlet: RouterOutlet) {
+    return outlet?.activatedRouteData?.['animation'];
   }
 }
