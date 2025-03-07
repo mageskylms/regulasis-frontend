@@ -19,3 +19,25 @@ h1 {
     font-size: 2em;
     color: #2c3e50
 }
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+
+/* Estilo para o fundo do Overlay */
+.cdk-overlay-container {
+    background-color: rgba(0, 0, 0, 0.8) !important;
+    /* Cor de fundo mais suave e opaca */
+    z-index: 1000 !important;
+    /* Garantir que o overlay esteja acima do conteúdo */
+}
+
+/* Se você deseja alterar o fundo especificamente do MatDialog */
+.mat-dialog-container {
+    background-color: #f5f5f5 !important;
+    /* Cor de fundo do dialog */
+    border-radius: 8px !important;
+    /* Bordas arredondadas */
+    padding: 20px !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1) !important;
+    /* Sombra */
+}

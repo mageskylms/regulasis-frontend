@@ -2,39 +2,87 @@
   <section class="details-container">
     <div class="content">
       <div class="details" *ngIf="empresa">
-        <h1>Detalhes da Empresa</h1>
-        <p><strong>Nome:</strong> {{ empresa.nome }}</p>
-        <p><strong>Nome Fantasia:</strong> {{ empresa.nomeFantasia }}</p>
+        <h1>{{ empresa.nome }} - {{ empresa.tipo }}</h1>
+        <p *ngIf="empresa.nomeFantasia"><strong>Nome Fantasia:</strong> {{ empresa.nomeFantasia }}</p>
         <p><strong>CNPJ:</strong> {{ empresa.cnpj }}</p>
-        <p><strong>Endereço:</strong> {{ empresa.enderecoSede }}</p>
-        <p><strong>Responsável:</strong> {{ empresa.nomeResponsavel }}</p>
-        <p><strong>Contato Responsável:</strong> {{ empresa.contatoResponsavel }}</p>
-        <p><strong>Email Responsável:</strong> {{ empresa.emailResponsavel }}</p>
+        <p><strong>Endereço:</strong> {{ empresa.endereco_sede }}</p>
+        <p><strong>Responsável:</strong> {{ empresa.nome_responsavel }}</p>
+        <p><strong>Contato Responsável:</strong> {{ empresa.contato_responsavel }}</p>
+        <p><strong>Email Responsável:</strong> {{ empresa.email_responsavel }}</p>
         <p><strong>Setor:</strong> {{ empresa.setor }}</p>
         <p><strong>Observações:</strong> {{ empresa.observacoes }}</p>
-        <p><strong>Tipo:</strong> {{ empresa.tipo }}</p>
-        <p *ngIf="empresa.tipo === 'filial'" >
+        <p *ngIf="empresa.tipo === 'filial'">
           <strong>Empresa Sede:</strong> {{ empresaSede?.nome + " | Código: " + empresaSede?.id || 'Carregando...' }}
           <br>
           <br>
           <a [routerLink]="['/detalhes-empresa', empresaSede?.id]">Detalhes da empresa sede</a>
-        </p>        
+        </p>
       </div>
       <div class="details-actions">
         <span class="opcoes"><strong>Opções</strong></span>
         <button class="btn btn-primary" (click)="editarEmpresa()">Editar</button>
         <button class="btn btn-danger" (click)="excluirEmpresa()">Excluir</button>
-        <button class="btn btn-primary" (click)="voltarParaEmpresas()">Voltar</button>
+        <button class="btn btn-primary" (click)="voltar()">Voltar</button>
       </div>
     </div>
   </section>
-  <section class="filiais-container">
-    <div class="content">
-      <h2>FILIAIS DA EMPRESA</h2>
-      <h3>Em breve</h3>
+
+  <!-- Exibir a seção FILIAIS apenas se empresa estiver definida e for uma SEDE -->
+<section class="filiais-container" *ngIf="empresa?.tipo === 'sede'">
+  <div class="content">
+    <h2>FILIAIS DA EMPRESA</h2>
+
+    <div class="search-section">
+      <div class="filters">
+        <input id="search-input" type="text" [(ngModel)]="searchName" (keyup)="searchCompanies()" placeholder="Buscar por nome..." />
+        <input id="search-input" type="text" [(ngModel)]="searchCnpj" (keyup)="searchCompanies()" placeholder="Buscar por CNPJ..." />
+        <select [(ngModel)]="selectedSector" (change)="searchCompanies()">
+          <option value="">Filtrar por Setor</option>
+          <option value="residencial">Residencial</option>
+          <option value="comercial">Comercial</option>
+          <option value="industrial">Industrial</option>
+          <option value="outro">Outro</option>
+        </select>
+      </div>
+      <button id="clear-filters" (click)="clearFilters()">Limpar Filtros</button>
     </div>
-  </section>
-  <section class="filiais-container">
+
+    <div class="company-list" *ngIf="companies.length > 0 ">
+      <table>
+        <thead>
+          <tr>
+            <th>Nome</th>
+            <th>Tipo</th>
+            <th>CNPJ</th>
+            <th>Responsável</th>
+            <th>Email Responsável</th>
+            <th>Ações</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let company of filteredCompanies">
+            <td>{{ company.nome }}</td>
+            <td>{{ company.tipo }}</td>
+            <td>{{ company.cnpj }}</td>
+            <td>{{ company.nome_responsavel }}</td>
+            <td>{{ company.email_responsavel }}</td>
+            <td>
+              <a [routerLink]="['/detalhes-empresa', company.id]">Detalhes</a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Exibir mensagem específica se NÃO houver filiais cadastradas -->
+    <div *ngIf="companies?.length === 0 ">
+      <p>Essa empresa ainda não possui filial.</p>
+    </div>
+  </div>
+</section>
+
+
+  <section class="processos-container">
     <div class="content">
       <h2>PROCESSOS DA EMPRESA</h2>
       <h3>Em breve</h3>

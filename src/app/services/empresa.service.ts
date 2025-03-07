@@ -16,6 +16,10 @@ export class EmpresaService {
     return this.apiService.get(`empresas/${id}`);
   }
 
+  editarEmpresa(id: string, empresa: any): Observable<any> {
+    return this.apiService.put(`empresas/${id}`, empresa);
+  }
+
   criarEmpresa(empresa: any): Observable<any> {
     return this.apiService.post('empresas', empresa); // Chama o método genérico POST do ApiService
   }

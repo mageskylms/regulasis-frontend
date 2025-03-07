@@ -4,13 +4,17 @@ import { Router, RouterOutlet } from '@angular/router';
 import { LoginComponent } from './components/login/login.component';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { trigger, transition, style, animate } from '@angular/animations';
-import { UsuariosComponent } from './components/usuarios/usuarios.component';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
-  imports: [CommonModule, LoginComponent, SidebarComponent, RouterOutlet],
+  imports:
+    [CommonModule,
+      LoginComponent,
+      SidebarComponent,
+      RouterOutlet,
+    ],
   animations: [
     trigger('fadeIn', [
       transition(':enter', [style({ opacity: 0 }), animate('500ms ease-in', style({ opacity: 1 }))])
@@ -27,7 +31,7 @@ export class AppComponent {
   isLoggedIn: boolean = false;
   showLoading: boolean = true;
 
-  constructor(private router: Router) {}
+  constructor(private router: Router) { }
 
   ngOnInit() {
     const token = localStorage.getItem('token');

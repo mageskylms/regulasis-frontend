@@ -4,18 +4,27 @@
     <!-- Formulário de criação e edição -->
     <div class="user-form">
         <h3>{{ isEditing ? 'Editar Usuário' : 'Criar Novo Usuário' }}</h3>
-        <form (ngSubmit)="isEditing ? updateUser() : createUser()">
-            <label for="name">Nome</label>
-            <input type="text" id="name" [(ngModel)]="userForm.name" name="name" required>
+        <form [formGroup]="userForm" (ngSubmit)="isEditing ? updateUser() : createUser()">
+            <label for="id">Código</label>
+            <input type="text" id="id" formControlName="id" name="id" required>
+
+            <label for="nome">Nome</label>
+            <input type="text" id="nome" formControlName="nome" name="nome" required>
 
             <label for="email">E-mail</label>
-            <input type="email" id="email" [(ngModel)]="userForm.email" name="email" required>
+            <input type="email" id="email" formControlName="email" name="email" required>
+
+            <label for="email">Contato</label>
+            <input type="text" id="contato" formControlName="nome" name="contato" required>
+
+            <label for="user">Usuário</label>
+            <input type="text" id="user" formControlName="user" name="user" required>
 
             <label for="password">Senha</label>
-            <input type="password" id="password" [(ngModel)]="userForm.password" name="password" required>
+            <input type="password" id="password" formControlName="password" name="password" required>
 
-            <label for="role">Função</label>
-            <select id="role" [(ngModel)]="userForm.role" name="role" required>
+            <label for="regra">Função</label>
+            <select id="regra" formControlName="regra" name="regra" required>
                 <option value="admin">Administrador</option>
                 <option value="coordenador">Coordenador</option>
                 <option value="supervisor">Supervisor</option>
@@ -23,19 +32,38 @@
             </select>
 
             <button type="submit">{{ isEditing ? 'Atualizar' : 'Criar' }} Usuário</button>
-            <button type="button" (click)="resetForm()">Cancelar</button>
+            <button type="button" (click)="cancelEdit()">Cancelar</button>
         </form>
     </div>
 
-    <!-- Lista de usuários -->
-    <div class="user-list">
-        <h3>Lista de Usuários</h3>
-        <ul>
-            <li *ngFor="let usuario of usuarios">
-                <span>{{ usuario.nome }} - {{ usuario.email }} - {{ usuario.role }}</span>
-                <button (click)="editUser(usuario)">Editar</button>
-                <button (click)="deleteUser(usuario.id)">Excluir</button>
-            </li>
-        </ul>
+    <div class="user-list" >
+        <h2>Usuários Cadastrados</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>User</th>
+                    <th>Nome</th>
+                    <th>Regra</th>
+                    <th>Email</th>
+                    <th>Contato</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let usuario of usuarios">
+                    <td>{{ usuario.id }}</td>
+                    <td>{{ usuario.user }}</td>
+                    <td>{{ usuario.nome }}</td>
+                    <td>{{ usuario.regra }}</td>
+                    <td>{{ usuario.email }}</td>
+                    <td>{{ usuario.contato }}</td>
+                    <td>
+                        <a (click)="editUser(usuario)" >Editar</a>
+                        <a (click)="deleteUser(usuario.id)" >Excluír</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
     </div>
 </div>

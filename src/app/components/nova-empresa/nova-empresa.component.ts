@@ -3,6 +3,7 @@ import { EmpresaService } from '../../services/empresa.service';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { Location } from '@angular/common';
 
 
 @Component({
@@ -17,7 +18,12 @@ export class NovaEmpresaComponent implements OnInit {
   showDropdown = false;
   empresaForm: FormGroup;
 
-  constructor(private empresaService: EmpresaService, private fb: FormBuilder, private router: Router) {
+  constructor(
+    private empresaService: EmpresaService, 
+    private fb: FormBuilder, 
+    private router: Router,
+    private location: Location
+  ) {
     this.empresaForm = this.fb.group({
       nome: ['', Validators.required],
       nomeFantasia: [''],
@@ -42,8 +48,8 @@ export class NovaEmpresaComponent implements OnInit {
     });
   }
 
-  voltarParaEmpresas() {
-    this.router.navigate(['/empresas']);
+  voltar() {
+    this.location.back();
   }
 
   toggleDropdown() {

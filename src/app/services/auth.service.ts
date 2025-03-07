@@ -37,6 +37,11 @@ export class AuthService {
     return null;
   }
 
+  refreshToken(password: string): Observable<{ token: string, userName: string }> {
+    const user = localStorage.getItem('user');
+    return this.apiService.post(`login`, { user, password });
+  }
+
   pegarNomeUsuario(): Observable<{ name: string } | null> {
     const id = this.getUserData();
 
@@ -48,11 +53,11 @@ export class AuthService {
 
   decodeToken(token: string): any {
     try {
-        return jwtDecode(token);
+      return jwtDecode(token);
     } catch (Error) {
-        return null; // Retorna null se o token for inválido
+      return null; // Retorna null se o token for inválido
     }
-}
+  }
 
   isLoggedIn(): boolean {
     return !!this.getToken();

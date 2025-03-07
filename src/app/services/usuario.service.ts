@@ -18,15 +18,19 @@ export class UsuarioService {
     return this.apiService.get(`usuarios/${userId}`);
   }
 
+  getUserById(id: string): Observable<any> {
+    return this.apiService.get(`usuarios/${id}`);
+  }
+
   createUser(usuario: any): Observable<any> {
-    return this.apiService.post('usuario/', usuario);
+    return this.apiService.post('usuarios/', usuario);
   }
   
-  updateUser(usuario: any): Observable<any> {
-    return this.apiService.post('usuario/', usuario);
+  updateUser(id: string, usuario: any): Observable<any> {
+    return this.apiService.put(`usuarios/${id}`, usuario);
   }
 
   deleteUser(id: number): Observable<any> {
-    return this.apiService.delete(`usuario/:id`, id);
+    return this.apiService.delete(`usuarios/`, id);
   }
 }

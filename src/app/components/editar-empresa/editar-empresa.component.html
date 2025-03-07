@@ -1,31 +1,32 @@
 <div class="main">
-    
+
     <section class="form-container">
-        <h1>Cadastrar Nova Empresa</h1>
-        <form [formGroup]="empresaForm" (ngSubmit)="criarEmpresa()">
+        <h1>Editar empresa</h1>
+        <form [formGroup]="empresaForm" (ngSubmit)="editarEmpresa()">
             <!-- Dados Básicos da Empresa -->
+            <label for="idEmpresa">ID</label>
+            <input type="text" id="id" formControlName="id" required>
+
             <label for="nomeEmpresa">Nome</label>
-            <input type="text" id="nome" formControlName="nome" placeholder="Ex: Empresa XYZ Ltda"
-                required>
+            <input type="text" id="nome" formControlName="nome" required>
 
             <label for="nomeFantasia">Nome Fantasia</label>
-            <input type="text" id="nomeFantasia" formControlName="nomeFantasia" placeholder="Ex: Empresa XYZ Ltda">
+            <input type="text" id="nomeFantasia" formControlName="nomeFantasia">
 
             <label for="cnpj">CNPJ</label>
-            <input type="text" id="cnpj" formControlName="cnpj" placeholder="Ex: 12.345.678/0001-99" required>
+            <input type="text" id="cnpj" formControlName="cnpj" required>
 
             <label for="enderecoSede">Endereço</label>
-            <input type="text" id="enderecoSede" formControlName="enderecoSede" placeholder="Ex: Rua ABC, 123" required>
+            <input type="text" id="enderecoSede" formControlName="enderecoSede" required>
 
             <label for="nomeResponsavel">Responsável</label>
-            <input type="text" id="nomeResponsavel" formControlName="nomeResponsavel" placeholder="Nome do Responsável"
-                required>
+            <input type="text" id="nomeResponsavel" formControlName="nomeResponsavel" required>
 
             <label for="contatoResponsavel">Contato Responsável</label>
-            <input type="text" id="contatoResponsavel" formControlName="contatoResponsavel" placeholder="Ex: (11) 1234-5678">
+            <input type="text" id="contatoResponsavel" formControlName="contatoResponsavel" >
 
             <label for="emailResponsavel">Email Responsável</label>
-            <input type="email" id="emailResponsavel" formControlName="emailResponsavel" placeholder="contato@empresa.com" required>
+            <input type="email" id="emailResponsavel" formControlName="emailResponsavel" required>
 
             <!-- Setor da Empresa -->
             <label for="setor">Setor</label>
@@ -38,7 +39,7 @@
 
             <!-- Observações -->
             <label for="observacoes">Observações</label>
-            <textarea id="observacoes" formControlName="observacoes" placeholder="Observações adicionais (opcional)"></textarea>
+            <textarea id="observacoes" formControlName="observacoes"></textarea>
             <label for="tipo">Tipo:</label>
             <div>
                 <label>
@@ -68,7 +69,7 @@
             <div class="form-actions">
                 <button class="btn btn-secondary" type="button" (click)="voltar()">Cancelar</button>
             </div>
-            <button type="submit">Salvar Empresa</button>
+            <button type="submit">Editar Empresa</button>
         </form>
     </section>
 

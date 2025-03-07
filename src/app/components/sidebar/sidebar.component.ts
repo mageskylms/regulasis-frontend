@@ -1,12 +1,13 @@
 import { Component, OnInit, Renderer2,  } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
 import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-sidebar',
   templateUrl: './sidebar.component.html',
   styleUrls: ['./sidebar.component.css'],
-  imports: [CommonModule]
+  imports: [CommonModule, RouterModule]
 })
 export class SidebarComponent implements OnInit {
   isCollapsed = false;
@@ -15,7 +16,7 @@ export class SidebarComponent implements OnInit {
   constructor(private renderer: Renderer2, private authService: AuthService) {}
 
   ngOnInit() {
-    this.userName = localStorage.getItem('user') || 'Usuário';
+    this.userName = localStorage.getItem('userName') || 'Usuário';
   }
 
   logout() {

@@ -15,7 +15,7 @@ export class EmpresaComponent implements OnInit {
   filteredCompanies: any[] = [];
   searchName: string = '';
   searchCnpj: string = '';
-  selectedSector: string = '';
+  selectedTipo: string = '';
 
   constructor(private empresaService: EmpresaService, private router: Router, private renderer: Renderer2) { }
 
@@ -35,14 +35,14 @@ export class EmpresaComponent implements OnInit {
     this.filteredCompanies = this.companies.filter((company) => {
       const matchesName = company.nome.toLowerCase().includes(this.searchName.toLowerCase());
       const matchesCnpj = company.cnpj.includes(this.searchCnpj);
-      const matchesSector = this.selectedSector.toLowerCase() ? company.setor === this.selectedSector : true;
-      return matchesName && matchesSector && matchesCnpj;
+      const matchesTipo = this.selectedTipo.toLowerCase() ? company.tipo === this.selectedTipo : true;
+      return matchesName && matchesTipo && matchesCnpj;
     });
   }
 
   clearFilters(): void {
     this.searchName = '';
-    this.selectedSector = '';
+    this.selectedTipo = '';
     this.filteredCompanies = [...this.companies];  // Resetar os filtros
   }
 

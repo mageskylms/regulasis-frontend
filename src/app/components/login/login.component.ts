@@ -11,7 +11,7 @@ import { CommonModule } from '@angular/common';
   imports: [CommonModule, ReactiveFormsModule]
 })
 export class LoginComponent implements OnInit {
-  @Output() loginSuccess = new EventEmitter<void>(); // Emite evento ao logar
+  @Output() loginSuccess = new EventEmitter<void>();
   loginForm: FormGroup;
   loading: boolean = false;
   error: string = '';
@@ -30,7 +30,7 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
     const token = localStorage.getItem('token');
     if (token) {
-      this.loginSuccess.emit(); // Se o token já existir, emite o evento
+      this.loginSuccess.emit();
     }
   }
 
@@ -48,9 +48,10 @@ export class LoginComponent implements OnInit {
         
         if (response.token) {
           console.log(response.userName);
-          localStorage.setItem('token', response.token); // Armazena o token
-          localStorage.setItem('user', response.userName); // Armazena o token
-          this.loginSuccess.emit(); // Emite evento para liberar o sistema
+          localStorage.setItem('token', response.token);
+          localStorage.setItem('userName', response.userName);
+          localStorage.setItem('user', user);
+          this.loginSuccess.emit();
         } else {
           this.error = 'Token não recebido. Tente novamente.';
         }

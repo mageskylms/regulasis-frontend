@@ -6,24 +6,24 @@
             <a routerLink="/nova-empresa" class="btn btn-primary">Nova Empresa</a>
             <button id="clear-filters" (click)="clearFilters()">Limpar Filtros</button>
         </div>
-        
+
         <!-- Seção de busca com filtros -->
         <div class="search-section">
             <div class="filters">
-                <input id="search-input" type="text" [(ngModel)]="searchName" (keyup)="searchCompanies()" placeholder="Buscar por nome..." />
-                <input id="search-input" type="text" [(ngModel)]="searchCnpj" (keyup)="searchCompanies()" placeholder="Buscar por CNPJ..." />
-                
-                <select [(ngModel)]="selectedSector" (change)="searchCompanies()">
-                    <option value="">Filtrar por Setor</option>
-                    <option value="residencial">Residencial</option>
-                    <option value="comercial">Comercial</option>
-                    <option value="industrial">Industrial</option>
-                    <option value="outro">Outro</option>
+                <input id="search-input" type="text" [(ngModel)]="searchName" (keyup)="searchCompanies()"
+                    placeholder="Buscar por nome..." />
+                <input id="search-input" type="text" [(ngModel)]="searchCnpj" (keyup)="searchCompanies()"
+                    placeholder="Buscar por CNPJ..." />
+
+                <select [(ngModel)]="selectedTipo" (change)="searchCompanies()">
+                    <option value="">Tipo de empresa</option>
+                    <option value="sede">Sede</option>
+                    <option value="filial">Filial</option>
                 </select>
-                
+
             </div>
         </div>
-        
+
         <!-- Lista de empresas -->
         <div class="company-list" *ngIf="companies.length > 0">
             <h2>Empresas Cadastradas</h2>
@@ -31,29 +31,28 @@
                 <thead>
                     <tr>
                         <th>Nome</th>
+                        <th>Tipo</th>
                         <th>CNPJ</th>
-                        <th>Setor</th>
                         <th>Responsável</th>
                         <th>Email Responsável</th>
                         <th>Ações</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr *ngFor="let company of filteredCompanies">
-                    <td>{{ company.nome }}</td>
-                    <td>{{ company.cnpj }}</td>
-                    <td>{{ company.setor }}</td>
-                    <td>{{ company.nome_responsavel }}</td>
-                    <td>{{ company.email_responsavel }}</td>
-                    <td>
-                        <a [routerLink]="['/detalhes-empresa', company.id]">Detalhes</a> |
-                        <a (click)="deleteCompany(company.id)" style="cursor: pointer; color: red;" >Excluir</a>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let company of filteredCompanies">
+                        <td>{{ company.nome }}</td>
+                        <td>{{ company.tipo }}</td>
+                        <td>{{ company.cnpj }}</td>
+                        <td>{{ company.nome_responsavel }}</td>
+                        <td>{{ company.email_responsavel }}</td>
+                        <td>
+                            <a [routerLink]="['/detalhes-empresa', company.id]">Detalhes</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
-</div>
 
     <div *ngIf="companies.length === 0">
         <p>Nenhuma empresa encontrada.</p>
