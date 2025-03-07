@@ -1,0 +1,51 @@
+<div class="main">
+    <h1>Gerenciar Processos</h1>
+    <div class="action-buttons">
+        <a routerLink="/novo-processo" class="btn btn-primary">Novo processo</a>
+        <button id="clear-filters" (click)="clearFilters()">Limpar Filtros</button>
+    </div>
+    <div class="search-section">
+        <div class="filters">
+            <input id="search-input" type="text" [(ngModel)]="nomeProcurado" (keyup)="procurarProcessos()"
+                placeholder="Buscar por nome do processo..." />
+            <input id="search-input" type="text" [(ngModel)]="tipoProcurado" (keyup)="procurarProcessos()"
+                placeholder="Buscar por tipo de processo..." />
+            <select [(ngModel)]="statusProcurado" (change)="procurarProcessos()">
+                <option value="">Status</option>
+                <option value="pendente">Pendente</option>
+                <option value="em andamento">Em andamento</option>
+                <option value="concluído">Concluído</option>
+            </select>
+        </div>
+    </div>
+
+    <!-- Lista de empresas -->
+    <div class="processos-list" *ngIf="processos.length > 0">
+        <h2>Processos</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Nome</th>
+                    <th>Tipo</th>
+                    <th>status</th>
+                    <th>prazo</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let processo of processosFiltrados">
+                    <td>{{ processo.nome }}</td>
+                    <td>{{ processo.tipo }}</td>
+                    <td>{{ processo.status }}</td>
+                    <td>{{ processo.data_prazo }}</td>
+                    <td>
+                        <a [routerLink]="['/detalhes-processo', processo.id]">Detalhes</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div *ngIf="processos.length === 0">
+        <p>Nenhum processo encontrado.</p>
+    </div>
+</div>
