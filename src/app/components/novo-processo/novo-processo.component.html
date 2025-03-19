@@ -1,0 +1,46 @@
+<div class="main">
+
+    <section class="form-container">
+        <h1>Novo processo</h1>
+        <form [formGroup]="processoForm" (ngSubmit)="criarProcesso()" >
+            <!-- Dados Básicos da Empresa -->
+            <label for="id_usuario">Usuário*</label>
+            <input type="text" id="id_usuario" formControlName="id_usuario" required>
+            <label for="id_empresa">Empresa*</label>
+            <select id="id_empresa" formControlName="id_empresa">
+                <option *ngFor="let empresa of empresas" [value]="empresa.id">
+                    {{ empresa.nome }}
+                </option>
+            </select>
+            <label for="nome">Tipo de processo*</label>
+            <select id="nome" formControlName="nome" required>
+                <option value="Licença_de_publicidade">Licença de publicidade</option>
+            </select>
+            <label for="tipo">Servico*</label>
+            <select id="tipo" formControlName="tipo" required>
+                <option value="Obtenção">Obtenção</option>
+                <option value="Renovação">Renovação</option>
+                <option value="Alteração">Alteração/atualização</option>
+            </select>
+            <label for="descricao">Descrição</label>
+            <textarea type="text" id="descricao" formControlName="descricao" placeholder="Ex: Solicitado nova licença"></textarea>
+            <label for="data_inicio">Data inicio*</label>
+            <input type="date" id="data_inicio" formControlName="data_inicio" placeholder="Ex: 18/07/2024" required>
+            <label for="data_prazo">Prazo*</label>
+            <input type="date" id="data_prazo" formControlName="data_prazo" placeholder="Ex: 18/07/2024" required>
+            <label for="status">Status*</label>
+            <select id="status" formControlName="status" required>
+                <option value="inicial">Inicial</option>
+                <option value="comunique_se">Comunique-se</option>
+                <option value="deferido">Deferido</option>
+                <option value="indeferido">Indeferido</option>
+                <option value="pendencia_cliente">Pendencia Cliente</option>
+                <option value="pendencia_processo">Pendencia processo paralelo</option>
+            </select>
+            <div class="form-actions">
+                <button class="btn btn-secondary" type="button" (click)="voltar()">Cancelar</button>
+            </div>
+            <button type="submit">Salvar Empresa</button>
+        </form>
+    </section>
+</div>
