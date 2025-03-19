@@ -8,7 +8,7 @@ import { AuthService } from './auth.service';
 })
 export class ApiService {
   // private baseUrl: string = 'http://localhost:3000/api';
-  private baseUrl: string = 'http://3.137.165.165:3000/api';
+  private baseUrl: string = 'https://regulasis.ddns.net/api';
   private _authService!: AuthService;
 
   constructor(private http: HttpClient, private injector: Injector) {}
@@ -19,7 +19,6 @@ export class ApiService {
     }
     return this._authService;
   }
-
   private getHeaders(): HttpHeaders {
     const token = this.authService.getToken();
     return new HttpHeaders({
