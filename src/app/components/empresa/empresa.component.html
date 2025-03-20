@@ -1,5 +1,5 @@
 <div class="main">
-    <h1>Gerenciar Empresas</h1>
+    <h1>Empresas</h1>
     <div class="container">
         <!-- Botão de criação de nova empresa -->
         <div class="action-buttons">
@@ -25,8 +25,8 @@
         </div>
 
         <!-- Lista de empresas -->
-        <div class="company-list" *ngIf="companies.length > 0">
-            <h2>Empresas Cadastradas</h2>
+        <div class="company-list" *ngIf="empresas.length > 0">
+            <h2>Empresas Sede</h2>
             <table>
                 <thead>
                     <tr>
@@ -39,14 +39,14 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr *ngFor="let company of filteredCompanies">
-                        <td>{{ company.nome }}</td>
-                        <td>{{ company.tipo }}</td>
-                        <td>{{ company.cnpj }}</td>
-                        <td>{{ company.nome_responsavel }}</td>
-                        <td>{{ company.email_responsavel }}</td>
+                    <tr *ngFor="let empresa of empresasFiltradas">
+                        <td>{{ empresa.nome }}</td>
+                        <td>{{ empresa.tipo }}</td>
+                        <td>{{ empresa.cnpj }}</td>
+                        <td>{{ empresa.nome_responsavel }}</td>
+                        <td>{{ empresa.email_responsavel }}</td>
                         <td>
-                            <a [routerLink]="['/detalhes-empresa', company.id]">Detalhes</a>
+                            <a [routerLink]="['/detalhes-empresa', empresa.id]">Detalhes</a>
                         </td>
                     </tr>
                 </tbody>
@@ -54,7 +54,7 @@
         </div>
     </div>
 
-    <div *ngIf="companies.length === 0">
+    <div *ngIf="empresas.length === 0">
         <p>Nenhuma empresa encontrada.</p>
     </div>
 </div>

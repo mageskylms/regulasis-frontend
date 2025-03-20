@@ -11,8 +11,8 @@ import { EmpresaService } from '../../services/empresa.service';
   styleUrls: ['./empresa.component.css']
 })
 export class EmpresaComponent implements OnInit {
-  companies: any[] = [];
-  filteredCompanies: any[] = [];
+  empresas: any[] = [];
+  empresasFiltradas: any[] = [];
   searchName: string = '';
   searchCnpj: string = '';
   selectedTipo: string = '';
@@ -20,22 +20,22 @@ export class EmpresaComponent implements OnInit {
   constructor(private empresaService: EmpresaService, private router: Router, private renderer: Renderer2) { }
 
   ngOnInit(): void {
-    this.loadCompanies();
+    this.carregaEmpresas();
   }
 
 
-  loadCompanies(): void {
+  carregaEmpresas(): void {
     this.empresaService.getEmpresas().subscribe((data) => {
-      this.companies = data;
-      this.filteredCompanies = [...this.companies];  // Inicialmente, mostra todas as empresas
+      this.empresas = data.filter((empresa: any) => empresa.tipo === 'sede');
+      this.empresasFiltradas = [...this.empresas];  
     });
   }
 
   searchCompanies(): void {
-    this.filteredCompanies = this.companies.filter((company) => {
-      const matchesName = company.nome.toLowerCase().includes(this.searchName.toLowerCase());
-      const matchesCnpj = company.cnpj.includes(this.searchCnpj);
-      const matchesTipo = this.selectedTipo.toLowerCase() ? company.tipo === this.selectedTipo : true;
+    this.empresasFiltradas = this.empresas.filter((empresa) => {
+      const matchesName = empresa.nome.toLowerCase().includes(this.searchName.toLowerCase());
+      const matchesCnpj = empresa.cnpj.includes(this.searchCnpj);
+      const matchesTipo = this.selectedTipo.toLowerCase() ? empresa.tipo === this.selectedTipo : true;
       return matchesName && matchesTipo && matchesCnpj;
     });
   }
@@ -43,32 +43,7 @@ export class EmpresaComponent implements OnInit {
   clearFilters(): void {
     this.searchName = '';
     this.selectedTipo = '';
-    this.filteredCompanies = [...this.companies];  // Resetar os filtros
+    this.empresasFiltradas = [...this.empresas];  // Resetar os filtros
   }
 
-  deleteCompany(id: number): void {
-    // Confirmação antes de excluir
-    if (confirm('Tem certeza que deseja excluir esta empresa?')) {
-      this.empresaService.excluirEmpresa(id).subscribe(
-        () => {
-          alert('Empresa excluída com sucesso!');
-          
-          // Remove a empresa da lista localmente (para evitar recarregar a página)
-          this.companies = this.companies.filter(company => company.id !== id);
-          this.filteredCompanies = this.filteredCompanies.filter(company => company.id !== id);
-          
-          // Redireciona para a lista de empresas
-          this.router.navigate(['/empresas']);
-        },
-        (error: unknown) => {
-          if (error instanceof Error) {
-            console.error('Erro ao excluir a empresa:', error.message);
-          } else {
-            console.error('Erro desconhecido ao excluir a empresa:', error);
-          }
-          alert('Erro ao excluir empresa. Tente novamente.');
-        }
-      );
-    }
-  }
 }
