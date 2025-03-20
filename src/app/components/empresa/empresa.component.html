@@ -14,13 +14,6 @@
                     placeholder="Buscar por nome..." />
                 <input id="search-input" type="text" [(ngModel)]="searchCnpj" (keyup)="searchCompanies()"
                     placeholder="Buscar por CNPJ..." />
-
-                <select [(ngModel)]="selectedTipo" (change)="searchCompanies()">
-                    <option value="">Tipo de empresa</option>
-                    <option value="sede">Sede</option>
-                    <option value="filial">Filial</option>
-                </select>
-
             </div>
         </div>
 
@@ -33,8 +26,6 @@
                         <th>Nome</th>
                         <th>Tipo</th>
                         <th>CNPJ</th>
-                        <th>Responsável</th>
-                        <th>Email Responsável</th>
                         <th>Ações</th>
                     </tr>
                 </thead>
@@ -43,8 +34,6 @@
                         <td>{{ empresa.nome }}</td>
                         <td>{{ empresa.tipo }}</td>
                         <td>{{ empresa.cnpj }}</td>
-                        <td>{{ empresa.nome_responsavel }}</td>
-                        <td>{{ empresa.email_responsavel }}</td>
                         <td>
                             <a [routerLink]="['/detalhes-empresa', empresa.id]">Detalhes</a>
                         </td>
