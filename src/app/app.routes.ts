@@ -16,7 +16,7 @@ export const routes: Routes = [
   { path: 'login', component: LoginComponent, data: { animation: 'LoginPage' } },
   { path: 'empresas', component: EmpresaComponent, data: { animation: 'EmpresasPage' } },
   { path: 'nova-empresa', component: NovaEmpresaComponent, data: { animation: 'EmpresasPage' } },
-  { path: 'nova-filial', component: NovaFilialComponent, data: { animation: 'EmpresasPage' } },
+  { path: 'empresas/:empresaId/nova-filial', component: NovaFilialComponent, data: { animation: 'EmpresasPage' } },
   { path: 'detalhes-empresa/:id', component: DetalhesEmpresaComponent, data: { animation: 'EmpresasPage' }}, 
   { path: 'editar-empresa/:id', component: EditarEmpresaComponent, data: { animation: 'EmpresasPage' }}, 
   { path: 'processos', component: ProcessosComponent, data: { animation: 'EmpresasPage' }},
