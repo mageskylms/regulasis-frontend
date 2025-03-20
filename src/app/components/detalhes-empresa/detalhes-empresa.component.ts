@@ -85,6 +85,12 @@ export class DetalhesEmpresaComponent implements OnInit {
     }
   }
 
+  novaFilial(): void {
+    if (this.empresa) {
+      this.router.navigate(['/nova-filial', this.empresa.id]);
+    }
+  }
+
   excluirEmpresa(): void {
     if (this.empresa && confirm('Tem certeza que deseja excluir essa empresa?')) {
       this.empresaService.excluirEmpresa(this.empresa.id).subscribe(
