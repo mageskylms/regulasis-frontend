@@ -7,6 +7,7 @@ import { AuthService } from './services/auth.service';
 import { ApiService } from './services/api.service';
 import { UsuarioService } from './services/usuario.service';
 import { TokenInterceptor } from './interceptors/token.interceptor';
+import { NgxMaskDirective, NgxMaskPipe } from 'ngx-mask';
 
 
 export const appConfig: ApplicationConfig = {
@@ -19,5 +20,7 @@ export const appConfig: ApplicationConfig = {
         ApiService,
         UsuarioService,
         { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },
+        NgxMaskDirective,
+        NgxMaskPipe
     ]
 };
