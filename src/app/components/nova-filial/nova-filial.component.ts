@@ -1,13 +1,20 @@
 import { Component, OnInit } from '@angular/core';
 import { EmpresaService } from '../../services/empresa.service';
-import { ActivatedRoute, Router, RouterModule } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Location } from '@angular/common';
+import { NgxMaskDirective, NgxMaskPipe, provideNgxMask } from 'ngx-mask';
 
 @Component({
   selector: 'app-nova-filial',
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [
+    CommonModule,
+    ReactiveFormsModule,
+    NgxMaskDirective,
+    NgxMaskPipe,
+  ],
+  providers: [provideNgxMask()],
   templateUrl: './nova-filial.component.html',
   styleUrl: './nova-filial.component.css'
 })
@@ -28,9 +35,9 @@ export class NovaFilialComponent {
     this.empresaForm = this.fb.group({
       nome: ['', Validators.required,],
       nomeFantasia: [''],
+      unidade: ["", Validators.required,],
       cnpj: ['', [
         Validators.required,
-        Validators.pattern(/^\d{2}\.?\d{3}\.?\d{3}\/?\d{4}-?\d{2}$/)
       ]],
       enderecoSede: ['', Validators.required],
       nomeResponsavel: ['', Validators.required],
@@ -44,10 +51,16 @@ export class NovaFilialComponent {
   }
 
   ngOnInit() {
+    this.carregarEmpresa();
+  }
+
+  carregarEmpresa() {
     const id = this.route.snapshot.paramMap.get('empresaId') || "";
     if (id) {
       this.getEmpresaDetails(id);
     }
+
+
   }
 
   getEmpresaDetails(id: string): void {
@@ -55,7 +68,7 @@ export class NovaFilialComponent {
       (data) => {
         this.empresa = data;
         console.log(this.empresa);
-        
+        this.carregaEmpresaNoForm();
       },
       (error) => {
         console.error('Erro ao buscar dados da empresa:', error);
@@ -64,58 +77,50 @@ export class NovaFilialComponent {
     );
   }
 
+  carregaEmpresaNoForm() {
+    setTimeout(() => {
+      this.empresaForm.patchValue({
+        idEmpresaSede: this.empresa.id,
+        nome: this.empresa.nome,
+        nomeFantasia: this.empresa.nome_fantasia,
+        setor: this.empresa.setor,
+        tipo: 'filial'
+      });
+    }, 1000);
+  }
+
   voltar() {
     this.location.back();
   }
 
-  toggleDropdown() {
-    const tipo = this.empresaForm.get('tipo')?.value;
-    this.showDropdown = tipo === 'filial';
-
-    if (this.showDropdown) {
-      this.empresaForm.get('selecao')?.enable();
-      this.empresaForm.get('selecao')?.setValidators([Validators.required]);
-    } else {
-      this.empresaForm.get('selecao')?.disable();
-      this.empresaForm.get('selecao')?.clearValidators();
-    }
-    this.empresaForm.get('selecao')?.updateValueAndValidity();
+  campoInvalido(campo: string): boolean {
+    const controle = this.empresaForm.get(campo);
+    return !!(controle && controle.invalid && (controle.dirty || controle.touched));
   }
 
+  criarFilial() {
 
-  criarEmpresa() {
-    if (this.empresaForm.invalid) {
-      console.log(this.empresaForm.errors);
-      alert('Preencha todos os campos obrigatórios corretamente.');
-      return;
-    }
-
-    const novaEmpresa = {
+    const novaFilial = {
       nome: this.empresaForm.value.nome,
       nomeFantasia: this.empresaForm.value.nomeFantasia,
       cnpj: this.empresaForm.value.cnpj,
-      enderecoSede: this.empresaForm.value.enderecoSede, // Corrigido
-      nomeResponsavel: this.empresaForm.value.nomeResponsavel, // Corrigido
-      contatoResponsavel: this.empresaForm.value.contatoResponsavel, // Corrigido
-      emailResponsavel: this.empresaForm.value.emailResponsavel, // Corrigido
+      enderecoSede: this.empresaForm.value.enderecoSede,
+      nomeResponsavel: this.empresaForm.value.nomeResponsavel,
+      contatoResponsavel: this.empresaForm.value.contatoResponsavel,
+      emailResponsavel: this.empresaForm.value.emailResponsavel,
       setor: this.empresaForm.value.setor,
       observacoes: this.empresaForm.value.observacoes,
       tipo: this.empresaForm.value.tipo,
-      idEmpresaSede: this.empresaForm.value.idEmpresaSede
+      idEmpresaSede: this.empresaForm.value.idEmpresaSede,
     };
 
-    // Se for filial, adicionamos 'selecao', senão, removemos.
-    if (this.empresaForm.value.tipo === 'filial') {
-      novaEmpresa.idEmpresaSede = this.empresaForm.value.idEmpresaSede || null;
-    }
+    console.log("Enviando para API:", novaFilial);
 
-    console.log("Enviando para API:", novaEmpresa);
-
-    this.empresaService.criarEmpresa(novaEmpresa).subscribe({
+    this.empresaService.criarEmpresa(novaFilial).subscribe({
       next: () => {
         alert('Empresa cadastrada com sucesso!');
         this.empresaForm.reset();
-        this.router.navigate(['/empresas']);
+        this.voltar();
       },
       error: (err) => {
         console.error('Erro ao cadastrar empresa:', err);

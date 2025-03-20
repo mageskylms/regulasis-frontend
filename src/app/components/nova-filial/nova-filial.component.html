@@ -1,71 +1,72 @@
 <div class="main">
-    
-    <section class="form-container">
-        <h1>Cadastrar Nova Empresa</h1>
-        <form [formGroup]="empresaForm" (ngSubmit)="criarEmpresa()" >
-            <!-- Dados Básicos da Empresa -->
-            <label for="nomeEmpresa">Nome</label>
-            <input [value]="empresa.nome" name="nome" type="text" [readonly]="true">
+
+    <section class="form-container" *ngIf="empresa && empresaForm; else carregando">
+        <h1>Cadastrando Filial da {{empresa.nome}} - {{empresa.tipo}}</h1>
+
+        <form [formGroup]="empresaForm" (ngSubmit)="criarFilial()">
+
+            <input type="hidden" formControlName="idEmpresaSede" [value]="empresa.id">
+
+            <label for="nome">Nome</label>
+            <input id="nome" type="text" formControlName="nome" readonly>
 
             <label for="nomeFantasia">Nome Fantasia</label>
-            <input [value]="empresa.nome_fantasia" formControlName="nomeFantasia" type="text" [readonly]="true">
+            <input id="nomeFantasia" type="text" formControlName="nomeFantasia" readonly>
 
             <label for="unidades">Unidade</label>
-            <input type="text" id="unidade" formControlName="unidade" placeholder="Carrefour Vila Mariana" required>
+            <input type="text" id="unidade" formControlName="unidade"
+                placeholder="Crie um nome para essa unidade. Ex: Carrefour V. Mariana"
+                [ngClass]="{'campo-invalido': campoInvalido('unidade')}" required>
+            <div *ngIf="campoInvalido('unidade')" class="erro">O nome da unidade é obrigatório.</div>
 
             <label for="cnpj">CNPJ</label>
-            <input type="text" id="cnpj" formControlName="cnpj" placeholder="Ex: 12.345.678/0001-99" required>
+            <input type="text" id="cnpj" formControlName="cnpj" placeholder="Ex: 12.345.678/0001-99"
+                mask="00.000.000/0000-00"
+                [ngClass]="{'campo-invalido': campoInvalido('cnpj')}" required>
+            <div *ngIf="campoInvalido('cnpj')" class="erro">Informe um CNPJ válido.</div>
 
             <label for="enderecoSede">Endereço</label>
-            <input type="text" id="enderecoSede" formControlName="enderecoSede" placeholder="Ex: Rua ABC, 123" required>
+            <input type="text" id="enderecoSede" formControlName="enderecoSede" placeholder="Ex: Rua ABC, 123"
+                [ngClass]="{'campo-invalido': campoInvalido('enderecoSede')}" required>
+            <div *ngIf="campoInvalido('enderecoSede')" class="erro">O endereço é obrigatório.</div>
 
             <label for="nomeResponsavel">Responsável</label>
             <input type="text" id="nomeResponsavel" formControlName="nomeResponsavel" placeholder="Nome do Responsável"
-                required>
+                [ngClass]="{'campo-invalido': campoInvalido('nomeResponsavel')}" required>
+            <div *ngIf="campoInvalido('nomeResponsavel')" class="erro">O nome do responsável é obrigatório.</div>
 
             <label for="contatoResponsavel">Contato Responsável</label>
-            <input type="text" id="contatoResponsavel" formControlName="contatoResponsavel" placeholder="Ex: (11) 1234-5678">
+            <input type="text" id="contatoResponsavel" formControlName="contatoResponsavel"
+                placeholder="Ex: (11) 1234-5678"
+                mask="(00) 90000-0000">
 
             <label for="emailResponsavel">Email Responsável</label>
-            <input type="email" id="emailResponsavel" formControlName="emailResponsavel" placeholder="contato@empresa.com" required>
+            <input type="email" id="emailResponsavel" formControlName="emailResponsavel"
+                placeholder="contato@empresa.com" [ngClass]="{'campo-invalido': campoInvalido('emailResponsavel')}"
+                required>
+            <div *ngIf="campoInvalido('emailResponsavel')" class="erro">Informe um e-mail válido.</div>
 
             <label for="setor">Setor</label>
-            <input [value]="empresa.setor" formControlName="setor" type="text" [readonly]="true">
+            <input id="setor" type="text" formControlName="setor" readonly>
 
-            <!-- Observações -->
             <label for="observacoes">Observações</label>
-            <textarea id="observacoes" formControlName="observacoes" placeholder="Observações adicionais (opcional)"></textarea>
-            <label for="tipo">Tipo:</label>
-            <div>
-                <label>
-                    <input type="radio" id="tipo" formControlName="tipo" value="sede" (change)="toggleDropdown()">
-                    Sede
-                </label><br>
-                <label>
-                    <input type="radio" id="tipo" formControlName="tipo" value="filial" (change)="toggleDropdown()">
-                    Filial
-                </label><br>
-            </div>
+            <textarea id="observacoes" formControlName="observacoes"
+                placeholder="Observações adicionais (opcional)"></textarea>
 
-            <div *ngIf="showDropdown">
-                <label for="" style="label {font-size: 1.1em; color: #2c3e50; grid-column: 1; text-align: right;}">
-                    Empresa sede:
-                </label>
-            </div>
+            <label for="tipo">Tipo</label>
+            <input type="text" id="tipo" value="filial" formControlName="tipo" readonly>
 
-            <div *ngIf="showDropdown">
-                <label for="idEmpresaSede"></label>
-                <select id="idEmpresaSede" formControlName="idEmpresaSede">
-                    <option *ngFor="let empresa of empresas" [value]="empresa.id">
-                        {{ empresa.nome }}
-                    </option>
-                </select>
-            </div>
-            <div class="form-actions">
+            <div class="form-actions" style="grid-column: 2;">
                 <button class="btn btn-secondary" type="button" (click)="voltar()">Cancelar</button>
+                <button type="submit">Salvar Empresa</button>
             </div>
-            <button type="submit">Salvar Empresa</button>
         </form>
     </section>
+
+    <ng-template #carregando>
+        <div class="loading-container">
+            <p>Carregando dados da empresa...</p>
+        </div>
+    </ng-template>
 
 </div>
