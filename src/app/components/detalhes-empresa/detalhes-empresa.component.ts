@@ -87,7 +87,8 @@ export class DetalhesEmpresaComponent implements OnInit {
 
   novaFilial(): void {
     if (this.empresa) {
-      this.router.navigate(['/nova-filial']);
+      const empresaId = this.empresa.id; // já carregado no detalhe
+      this.router.navigate([`/empresas/${empresaId}/nova-filial`]);
     }
   }
 
@@ -115,7 +116,7 @@ export class DetalhesEmpresaComponent implements OnInit {
       return matchesName && matchesSector && matchesCnpj && matchesSede;
     });
   }
-  
+
 
   clearFilters(): void {
     this.searchName = '';
