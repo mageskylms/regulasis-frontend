@@ -87,7 +87,7 @@ export class DetalhesEmpresaComponent implements OnInit {
 
   novaFilial(): void {
     if (this.empresa) {
-      this.router.navigate(['/nova-filial', this.empresa.id]);
+      this.router.navigate(['/nova-filial']);
     }
   }
 
