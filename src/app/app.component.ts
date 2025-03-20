@@ -40,7 +40,7 @@ export class AppComponent {
     // Simula um tempo de carregamento (ajustado para funcionar apenas quando necessário)
     if (this.isLoggedIn) {
       this.showLoading = false; // Se já estiver logado, não mostra o loading
-      this.router.navigate(['/empresas']); // Vai direto para a tela principal
+      this.router.navigate(['/dashboard']); // Vai direto para a tela principal
     } else {
       // Se não estiver logado, exibe o loading por 1,5 segundo
       setTimeout(() => {
@@ -54,7 +54,7 @@ export class AppComponent {
     this.showLoading = true; // Inicia o loading após o login
     // Exibe a tela de loading por 1 segundo para dar tempo de transição
     setTimeout(() => {
-      this.router.navigate(['/empresas']); // Redireciona para a tela principal
+      this.router.navigate(['/dashboard']); // Redireciona para a tela principal
       this.showLoading = false; // Fecha o loading após o redirecionamento
     }, 1000);
   }
