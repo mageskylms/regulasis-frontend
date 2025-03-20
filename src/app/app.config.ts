@@ -7,8 +7,8 @@ import { AuthService } from './services/auth.service';
 import { ApiService } from './services/api.service';
 import { UsuarioService } from './services/usuario.service';
 import { TokenInterceptor } from './interceptors/token.interceptor';
-import { NgxMaskDirective, NgxMaskPipe } from 'ngx-mask';
-
+import { NgxMaskDirective, } from 'ngx-mask';
+import { NovaFilialComponent } from './components/nova-filial/nova-filial.component';
 
 export const appConfig: ApplicationConfig = {
     providers: [
