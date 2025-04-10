@@ -1,59 +1,116 @@
-# RegulasisFrontend
+# 🏗️ RegulaSis - Sistema de Regularização de Imóveis
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.1.5.
+**RegulaSis** é uma aplicação web moderna para gerenciamento de processos de regularização e legalização de imóveis, com foco em produtividade, organização e automação do fluxo de trabalho.
 
-## Development server
+Este repositório contém o **front-end** do projeto, desenvolvido com **Angular** e projetado como uma **SPA (Single Page Application)** integrada ao back-end em Node.js.
 
-To start a local development server, run:
+---
 
+## 🚀 Teste Agora
+
+Você pode testar a aplicação utilizando o seguinte login demo:
+
+🔐 **Usuário:** `admin`  
+🔑 **Senha:** `admin`
+
+⚠️ *Este ambiente é apenas para demonstração. Nenhuma informação inserida será armazenada permanentemente.*
+⚠️ *Você encontrará erros que provavelmente já estão sendo "resolvidos, mas isso não impede de comunicar para melhorar o sistema.*
+
+---
+
+## 🧱 Tecnologias Utilizadas
+
+- [Angular 15+](https://angular.io/)
+- TypeScript
+- RxJS
+- Angular Material
+- SCSS
+- Arquitetura modular baseada em componentes
+
+---
+
+## 💻 Executando Localmente
+
+1. Clone o repositório:
+   ```bash
+   git clone https://github.com/seu-usuario/RegulaSisFrontend.git
+   cd RegulaSisFrontend
+   ```
+
+2. Instale as dependências:
+   ```bash
+   npm install
+   ```
+
+3. Inicie o servidor de desenvolvimento:
+   ```bash
+   ng serve
+   ```
+
+4. Acesse a aplicação em `http://localhost:4200/`
+
+---
+
+## 🛠️ Comandos Úteis
+
+### Gerar um novo componente:
 ```bash
-ng serve
+ng generate component nome-do-componente
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
-
-## Code scaffolding
-
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
-
-```bash
-ng generate component component-name
-```
-
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
-
+### Gerar outros recursos:
 ```bash
 ng generate --help
 ```
 
-## Building
-
-To build the project run:
-
+### Build de produção:
 ```bash
-ng build
+ng build --configuration production
 ```
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
-
+### Rodar testes unitários:
 ```bash
 ng test
 ```
 
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
+### Rodar testes end-to-end (e2e):
 ```bash
 ng e2e
 ```
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+---
 
-## Additional Resources
+## 📚 Recursos adicionais
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+- [Documentação oficial do Angular CLI](https://angular.dev/tools/cli)
+- [Angular Material](https://material.angular.io/)
+- [Guia oficial de estilos Angular](https://angular.io/guide/styleguide)
+
+---
+
+## 🌐 Sobre o projeto
+
+**RegulaSis** está em fase de desenvolvimento ativo e em breve terá:
+
+- Templates de processos por tipo de imóvel
+- Dashboard com visão de prioridades
+- Gestão de documentos e alertas de pendência
+- Fases personalizáveis por processo
+- Relatórios e indicadores de desempenho
+- Controle multiempresa e multiusuário com permissões específicas
+
+---
+
+## 📫 Contribuição e Feedback
+
+Este projeto é open source! Fique à vontade para abrir issues, sugerir melhorias ou contribuir com código.
+
+> Feedbacks sinceros e construtivos movem montanhas. E puxões de orelha também são bem-vindos. 😉
+
+---
+
+## 👨‍💻 Autor
+
+**[Lucas Magesky](https://magesky.vercel.app/)**  
+Desenvolvedor Fullstack em construção 🚧  
+Apaixonado por transformar caos em código e processos em produto.
